@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class UserDatail {
+public class UserDetail {
     @Id
     @GeneratedValue
     private Long id;
@@ -14,9 +14,9 @@ public class UserDatail {
     private String address;
     // Add more fields as needed
 
-    UserDatail() {}
+    UserDetail() {}
 
-    public UserDatail(String userId,  String phoneNumber, String address) {
+    public UserDetail(String userId,  String phoneNumber, String address) {
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.address = address;
