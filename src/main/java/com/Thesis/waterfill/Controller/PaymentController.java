@@ -47,6 +47,7 @@ public class PaymentController {
         return repo.findById(id)
                 .map(payment -> {
                     payment.setPaymentId(newPaymentId.getPaymentId());
+                    payment.setProductName(newPaymentId.getProductName());
                     payment.setQuantity(newPaymentId.getQuantity());
                     payment.setPaymentDate(newPaymentId.getPaymentDate());
                     return repo.save(payment);
