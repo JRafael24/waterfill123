@@ -36,13 +36,18 @@ public class UserDetailController {
                 .orElseThrow(() -> new UserDetailNotFoundException(id));
     }
 
+    @GetMapping("/account/{userId}")
+    public UserDetail getProfileByUserDetail(@PathVariable Long userId) {
+        return repo.findByUserId(userId);
+    }
+
     @GetMapping("/phone/{phoneNumber}")
     public UserDetail getProfileByPhoneNumber(@PathVariable String phoneNumber) {
         return repo.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new UserDetailNotFoundException("Profile with phone number " + phoneNumber + " not found"));
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addinfo")
     public UserDetail createProfile(@RequestBody UserDetail newProfile) {
         return repo.save(newProfile);
     }
