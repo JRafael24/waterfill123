@@ -111,8 +111,9 @@ public class UserController {
     }
 
     @GetMapping("/{email}")
-    public Optional<User> getuser(@PathVariable String email){
-        return userRepository.findByEmail(email);
+    public Long getuser(@PathVariable String email){
+        User user = userRepository.findByEmail(email);
+        return user.getId();
     }
 
 }

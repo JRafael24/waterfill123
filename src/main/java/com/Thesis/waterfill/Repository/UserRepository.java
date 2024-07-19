@@ -9,7 +9,7 @@ import com.Thesis.waterfill.Model.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+    User findByEmail(String email);
     Optional<User> findByUsername(String username);
     Optional<User> findByUsernameOrEmail (String email, String username);
 

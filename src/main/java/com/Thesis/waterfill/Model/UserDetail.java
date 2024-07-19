@@ -9,14 +9,14 @@ public class UserDetail {
     @Id
     @GeneratedValue
     private Long id;
-    private String userId;
+    private Long userId;
     private String phoneNumber;
     private String address;
     // Add more fields as needed
 
     UserDetail() {}
 
-    public UserDetail(String userId,  String phoneNumber, String address) {
+    public UserDetail(Long userId,  String phoneNumber, String address) {
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -26,7 +26,7 @@ public class UserDetail {
         return id;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -38,7 +38,7 @@ public class UserDetail {
         return address;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
