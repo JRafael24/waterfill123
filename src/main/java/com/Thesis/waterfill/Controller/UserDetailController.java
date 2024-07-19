@@ -47,7 +47,7 @@ public class UserDetailController {
                 .orElseThrow(() -> new UserDetailNotFoundException("Profile with phone number " + phoneNumber + " not found"));
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addinfo")
     public UserDetail createProfile(@RequestBody UserDetail newProfile) {
         return repo.save(newProfile);
     }
