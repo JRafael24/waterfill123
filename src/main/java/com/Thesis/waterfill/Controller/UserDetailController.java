@@ -1,7 +1,10 @@
 package com.Thesis.waterfill.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,40 +14,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Thesis.waterfill.Model.User;
 import com.Thesis.waterfill.Model.UserDetail;
 import com.Thesis.waterfill.NotFoundException.UserDetailNotFoundException;
 import com.Thesis.waterfill.Repository.UserDetailRepository;
+import com.Thesis.waterfill.Repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/v1/profile")
 public class UserDetailController {
     
+
+  
+
     private final UserDetailRepository repo;
+    private final UserRepository userRepository;
 
-    public UserDetailController(UserDetailRepository repo) {
-        this.repo = repo;
+    public UserDetailController(UserDetailRepository repo, UserRepository userRepository) {
+    this.repo = repo;
+    this.userRepository = userRepository;
     }
 
-    @GetMapping("/all")
-    public List<UserDetail> getAllProfiles() {
-        return repo.findAll();
-    }
 
-    @GetMapping("/{id}")
-    public UserDetail getProfileById(@PathVariable Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new UserDetailNotFoundException(id));
-    }
+    @GetMapping("account/{email}")
+    public HashMap<String, String>getMail(@PathVariable String email) {
+        User user = userRepository.findByEmail(email);
+        UserDetail userDetail = repo.findByUserId(user.getId());
 
-    @GetMapping("/account/{userId}")
-    public UserDetail getProfileByUserDetail(@PathVariable Long userId) {
-        return repo.findByUserId(userId);
-    }
+        HashMap<String, String> profile = new HashMap<String, String>();
 
-    @GetMapping("/phone/{phoneNumber}")
-    public UserDetail getProfileByPhoneNumber(@PathVariable String phoneNumber) {
-        return repo.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new UserDetailNotFoundException("Profile with phone number " + phoneNumber + " not found"));
+        profile.put("name", user.getUsername());
+        profile.put("mobileNumber", userDetail.getPhoneNumber());
+        profile.put("address", userDetail.getAddress());
+
+        return profile;
+
+
     }
 
     @PostMapping("/addinfo")
