@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Thesis.waterfill.Model.*;
@@ -17,6 +18,7 @@ import com.Thesis.waterfill.Repository.*;
 
 
 @RestController
+@RequestMapping("/api/v1/payment")
 public class PaymentController {
     PaymentRepository repo;
 
@@ -24,25 +26,25 @@ public class PaymentController {
         this.repo = repo;
     }
 
- @GetMapping("/payment")
+ @GetMapping("/all")
     public List<Payment> getPaymentId() {
         return repo.findAll();
 
 
 }
 
-@GetMapping("/payment/{id}")
+@GetMapping("/{id}")
     public Payment getPaymentId(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(() -> new PaymentNotFoundException(id));
     }
 
-     @PostMapping("/payment/new")
+     @PostMapping("/new")
     public String addPaymentId(@RequestBody Payment newPaymentId) {
         repo.save(newPaymentId);
         return "Payment Accepted";
     }
 
-    @PutMapping("/paymenent/edit/{id}")
+    @PutMapping("/edit/{id}")
     public Payment updatePaymentId(@PathVariable Long id, @RequestBody Payment newPaymentId) {
         return repo.findById(id)
                 .map(payment -> {
@@ -59,7 +61,7 @@ public class PaymentController {
     }
     
 
-    @DeleteMapping("/gallon/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteGallon(@PathVariable Long id){
         repo.deleteById(id);
         return"Payment Remove!";
