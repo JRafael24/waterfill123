@@ -52,6 +52,12 @@ public class UserDetailController {
 
     }
 
+    @GetMapping("/{email}")
+    public Long getUserAccount(@PathVariable String email){
+        User user = userRepository.findByEmail(email);
+        return user.getId();
+    }
+
     @PostMapping("/addinfo")
     public UserDetail createProfile(@RequestBody UserDetail newProfile) {
         return repo.save(newProfile);
