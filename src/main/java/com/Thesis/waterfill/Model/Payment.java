@@ -13,25 +13,27 @@ public class Payment {
     @Id
     @GeneratedValue
     private Long id;
-    private String PaymentId;
+    private Long userId;
+    private String paymentId;
     private String productName;
-    private int Quantity;
-    private Date PaymentDate;
-    private String Location;
-    private double Price;
+    private int quantity;
+    private Date paymentDate;
+    private String location;
+    private double price;
     
 
     Payment(){}
 
 
-    public Payment(String paymentId, String productName, int quantity, Date paymentDate, String location,
+    public Payment(Long userId, String paymentId, String productName, int quantity, Date paymentDate, String location,
             double price) {
-        this.PaymentId = paymentId;
+        this.userId = userId;
+        this.paymentId = paymentId;
         this.productName = productName;
-        this.Quantity = quantity;
-        this.PaymentDate = paymentDate;
-        this.Location = location;
-        this.Price = price;
+        this.quantity = quantity;
+        this.paymentDate = paymentDate;
+        this.location = location;
+        this.price = price;
     }
 
 
@@ -40,8 +42,13 @@ public class Payment {
     }
 
 
+    public Long getUserId() {
+        return userId;
+    }
+
+
     public String getPaymentId() {
-        return PaymentId;
+        return paymentId;
     }
 
 
@@ -51,27 +58,32 @@ public class Payment {
 
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
 
     public Date getPaymentDate() {
-        return PaymentDate;
+        return paymentDate;
     }
 
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
 
     public double getPrice() {
-        return Price;
+        return price;
+    }
+
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 
     public void setPaymentId(String paymentId) {
-        PaymentId = paymentId;
+        this.paymentId = paymentId;
     }
 
 
@@ -81,25 +93,28 @@ public class Payment {
 
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
 
     public void setPaymentDate(Date paymentDate) {
-        PaymentDate = paymentDate;
+        this.paymentDate = paymentDate;
     }
 
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
     }
 
 
     public void setPrice(double price) {
-        Price = price;
+        this.price = price;
     }
 
 
+    
+
+    
    
 
 }
