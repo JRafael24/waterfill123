@@ -26,9 +26,9 @@ public class PaymentController {
         this.repo = repo;
     }
 
- @GetMapping("/all")
-    public List<Payment> getPaymentId() {
-        return repo.findAll();
+ @GetMapping("user/{userId}")
+    public List<Payment> getPaymentByUserId(@PathVariable Long userId) {
+        return repo.findByUserId(userId);
 
 
 }
