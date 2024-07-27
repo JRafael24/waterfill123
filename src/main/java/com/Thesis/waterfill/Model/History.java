@@ -11,6 +11,7 @@ public class History {
     @Id
     @GeneratedValue
     private Long id;
+    private Long userId;
     private String productName;
     private Date PaymentDate;
     private int Quantity;
@@ -19,7 +20,8 @@ public class History {
 
     History(){}
 
-    public History(String productName, Date paymentDate, int quantity, String location, double price) {
+    public History(Long userId, String productName, Date paymentDate, int quantity, String location, double price) {
+        this.userId = userId;
         this.productName = productName;
         PaymentDate = paymentDate;
         Quantity = quantity;
@@ -41,6 +43,14 @@ public class History {
 
     public void setLocation(String location) {
         Location = location;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setPrice(double price) {

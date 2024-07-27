@@ -1,6 +1,9 @@
 package com.Thesis.waterfill.Controller;
 
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +41,18 @@ public class HistoryController {
         repo.save(newHistory);
         return "A New History is Added!";
     }
+
+     // GET endpoint to fetch History records by userId
+    @GetMapping("/user/{userId}")               
+    public ResponseEntity<List<History>> getHistoryByUserId(@PathVariable("userId") Long userId) {
+        List<History> histories = repo.findByUserId(userId);
+        if (histories.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(histories, HttpStatus.OK);
+    }
+
+    
 
    
 }
